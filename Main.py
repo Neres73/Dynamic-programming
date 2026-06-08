@@ -26,9 +26,9 @@ ARQUIVO_DADOS = "dados_alertas.json"
 LIMIAR_CRITICO = 4  # severidade >= 4 é considerada um evento crítico
 
 
-# ======================================================================
+
 # 1. CARREGAMENTO E MANIPULAÇÃO DE DADOS (arquivo externo .json)
-# ======================================================================
+
 def carregar_alertas(caminho):
     """Lê o arquivo JSON externo e devolve a lista de alertas (dicts)."""
     if not os.path.exists(caminho):
@@ -48,9 +48,9 @@ def montar_fila(alertas):
     return fila
 
 
-# ======================================================================
+
 # 2. PROCESSAMENTO DA FILA (FIFO) + GERAÇÃO DA PILHA DE CRÍTICOS (LIFO)
-# ======================================================================
+
 def processar_fila(fila):
     """
     Processa a fila em ordem FIFO (o primeiro a chegar é o primeiro a sair),
@@ -81,9 +81,9 @@ def processar_fila(fila):
     return relatorio, pilha_criticos
 
 
-# ======================================================================
+
 # 3. ORDENAÇÃO + BUSCA BINÁRIA RECURSIVA
-# ======================================================================
+
 def ordenar_por_id(alertas):
     """Devolve uma nova lista ordenada por id_alerta (pré-requisito da busca binária)."""
     return sorted(alertas, key=lambda a: a["id_alerta"])
@@ -122,9 +122,9 @@ def contar_criticos_recursivo(alertas, indice=0):
     return atual + contar_criticos_recursivo(alertas, indice + 1)
 
 
-# ======================================================================
+
 # 4. APRESENTAÇÃO (interface de texto)
-# ======================================================================
+
 def exibir_alerta(alerta):
     """Imprime os detalhes completos de um alerta."""
     print("  " + "-" * 50)
@@ -152,9 +152,9 @@ def exibir_menu():
     print("=" * 54)
 
 
-# ======================================================================
+
 # 5. PROGRAMA PRINCIPAL
-# ======================================================================
+
 def main():
     try:
         alertas = carregar_alertas(ARQUIVO_DADOS)
