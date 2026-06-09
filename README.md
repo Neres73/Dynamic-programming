@@ -1,4 +1,7 @@
 # 🛰️ SAEDS — Sistema de Análise de Eventos via Satélite
+Enzo Augusto RM562249
+Gustavo Neres RM561785
+Rafaell Santiago RM563486
 
 > **Global Solution — Dynamic Programming (2ESPY)**
 > Estruturas de Dados no Ecossistema Espacial
@@ -152,13 +155,3 @@ python main.py
 ```
 
 ---
-
-## 7. Checklist dos Requisitos Atendidos
-
-- [x] Problema real alinhado à **Indústria Espacial**
-- [x] Dados carregados de **arquivo externo** (`.json`) com **35 registros** (≥ 30)
-- [x] Dados gerenciados em memória com **Fila (FIFO)** e **Pilha (LIFO)**
-- [x] **Busca Binária** para localizar um registro pelo ID
-- [x] Busca central resolvida com **Recursividade**
-- [x] Código modular, todo encapsulado em **funções (`def`)**
-- [x] Documentação no **README.md** e entrega via **GitHub**
