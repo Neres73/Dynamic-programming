@@ -1,7 +1,6 @@
 # 🛰️ SAEDS — Sistema de Análise de Eventos via Satélite
-Enzo Augusto RM562249
-Gustavo Neres RM561785
-Rafaell Santiago RM563486
+
+**Integrantes:** Enzo Augusto (RM562249) · Gustavo Neres (RM561785) · Rafaell Santiago (RM563486)
 
 > **Global Solution — Dynamic Programming (2ESPY)**
 > Estruturas de Dados no Ecossistema Espacial
@@ -47,7 +46,7 @@ Cada necessidade do problema foi mapeada para uma estrutura/algoritmo adequado:
 
 Toda a lógica está **encapsulada em funções (`def`)**, mantendo o código modular.
 
-### Funções principais (`main.py`)
+### Funções principais (`Main.py`)
 
 | Função | Responsabilidade |
 |---|---|
@@ -120,11 +119,11 @@ dependências externas a instalar).
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/<seu-usuario>/<seu-repositorio>.git
-cd <seu-repositorio>
+git clone https://github.com/Neres73/Dynamic-programming.git
+cd Dynamic-programming
 
 # 2. Execute o sistema
-python main.py
+python Main.py
 ```
 
 ### Menu interativo
@@ -149,7 +148,7 @@ python main.py
 
 ```
 .
-├── main.py              # Programa principal (Fila, Pilha, Busca Binária, Recursão)
+├── Main.py              # Programa principal (Fila, Pilha, Busca Binária, Recursão)
 ├── dados_alertas.json   # Base de dados externa com 35 registros
 └── README.md            # Esta documentação
 ```
