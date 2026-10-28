@@ -22,7 +22,8 @@ import json
 import os
 from collections import deque
 
-ARQUIVO_DADOS = "dados_alertas.json"
+# Caminho do arquivo de dados relativo ao script (funciona de qualquer pasta)
+ARQUIVO_DADOS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dados_alertas.json")
 LIMIAR_CRITICO = 4  # severidade >= 4 é considerada um evento crítico
 
 
@@ -60,7 +61,7 @@ def processar_fila(fila):
         relatorio       -> dict com a contagem de alertas por severidade
         pilha_criticos  -> PILHA (lista usada como LIFO) com os eventos críticos
     """
-    relatorio = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
+    relatorio = {nivel: 0 for nivel in range(1, 6)}
     pilha_criticos = []  # lista usada como Pilha: append = push / pop = pop
 
     print("\n>>> Processando fila de telemetria (FIFO)...\n")
@@ -68,7 +69,7 @@ def processar_fila(fila):
     while fila:
         alerta = fila.popleft()           # desenfileira (sai da frente -> FIFO)
         sev = alerta["severidade"]
-        relatorio[sev] += 1
+        relatorio[sev] = relatorio.get(sev, 0) + 1   # tolera severidade fora de 1..5
         marcador = "  <== CRÍTICO" if sev >= LIMIAR_CRITICO else ""
         print(f"  [{posicao:02d}] Alerta {alerta['id_alerta']} | "
               f"{alerta['satelite']:<11} | {alerta['tipo_evento']:<16} | "
@@ -162,8 +163,11 @@ def main():
         print(f"ERRO ao carregar os dados: {erro}")
         return
 
-    print(f"\n[OK] {len(alertas)} alertas carregados de '{ARQUIVO_DADOS}'.")
+    print(f"\n[OK] {len(alertas)} alertas carregados de '{os.path.basename(ARQUIVO_DADOS)}'.")
 
+    # A busca binária exige a lista ordenada: ordena UMA vez (O(n log n)) e
+    # reaproveita em todas as buscas, que ficam em O(log n) cada.
+    alertas_ordenados = ordenar_por_id(alertas)
     pilha_criticos = []  # mantém os críticos do último processamento
 
     while True:
@@ -184,8 +188,7 @@ def main():
                 print("ID inválido. Digite apenas números.")
                 continue
             id_alvo = int(entrada)
-            ordenada = ordenar_por_id(alertas)  # busca binária exige lista ordenada
-            resultado = busca_binaria_recursiva(ordenada, id_alvo, 0, len(ordenada) - 1)
+            resultado = busca_binaria_recursiva(alertas_ordenados, id_alvo, 0, len(alertas_ordenados) - 1)
             if resultado:
                 print(f"\n[ACHADO] Alerta {id_alvo} localizado:")
                 exibir_alerta(resultado)
